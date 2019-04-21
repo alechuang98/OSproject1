@@ -53,9 +53,9 @@ int main(){
 	*/
 #ifdef TEST
 	for(int i = 0; i < 2; i ++) make(&tsk[i]);
-	run(&tsk[0], 2);
-	run(&tsk[1], 5);
-	run(&tsk[0], 8);
+	run(&tsk[0], 20);
+	run(&tsk[1], 50);
+	run(&tsk[0], 80);
 #endif
 	for(int i = 0; i < n; i ++){
 		clear(&tsk[i]);
