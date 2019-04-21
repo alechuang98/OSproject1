@@ -2,7 +2,7 @@
 
 ### control.h usage
 
-`make(TSK *tks)` 
+`make(TSK *tsk)` 
 
 創建一個process，還不會跑，`tsk -> pid`會被設成該process的pid。
 
@@ -13,6 +13,12 @@
 讓`tsd -> pid`的process跑`run_time`單位時間，`tsk -> rem`會被減去`run_time`
 
 __note__: `run_time > tsk -> rem` 並沒有被定義，不要出現這種情況
+
+
+
+`clear(TSK *tsk)`
+
+收屍
 
 
 
