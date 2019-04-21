@@ -4,7 +4,7 @@
 
 `make(TSK *tks)` 
 
-創建一個process，還不會跑，`tsk -> pid1`會被設成該process的pid。
+創建一個process，還不會跑，`tsk -> pid`會被設成該process的pid。
 
 
 
@@ -18,7 +18,7 @@ __note__: `run_time > tsk -> rem` 並沒有被定義，不要出現這種情況
 
 ### Prototype
 
-`<scheduling slgo>(const TSK *tsk)`
+`<scheduling algo>(const TSK *tsk)`
 
 要排序的話自己開葛array排，tsk[]內容不要改，方便debug。
 
