@@ -14,9 +14,9 @@
 #include <sched.h>
 #include <assert.h>
 #include "control.h"
+#include "my_rr.h"
 /* 
 #include "my_fifo.h"
-#include "my_rr.h"
 #include "my_sjf.h"
 #include "my_psjf.h"
 */
@@ -45,9 +45,9 @@ int main(){
 	for(int i = 0; i < n; i ++){
 		scanf("%s %d %d", tsk[i].name, &tsk[i].arr, &tsk[i].rem);
 	}
+	if(cmd[0] == 'R') my_rr(tsk, n);
 	/*
 	if(cmd[0] == 'F') my_fifo(tsk);
-	if(cmd[0] == 'R') my_rr(tsk);
 	if(cmd[0] == 'S') my_sjf(tsk);
 	if(cmd[0] == 'P') my_psjf(tsk);
 	*/
@@ -59,7 +59,8 @@ int main(){
 #endif
 	for(int i = 0; i < n; i ++){
 		clear(&tsk[i]);
-		assert(tsk[i].rem == 0);
+		// assert(tsk[i].rem == 0);
+		printf("%d: %d\n", i, tsk[i].rem);
 		printf("%s %d\n", tsk[i].name, tsk[i].pid);
 	}
 	shm_unlink("exe_T");
