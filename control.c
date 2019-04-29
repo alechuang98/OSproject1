@@ -18,8 +18,8 @@
 int _fd = 0, *_T = 0;
 
 void make(TSK *tsk){
-	// printf("make %s\n", tsk -> name);
-	// fflush(stdout);
+	printf("make %s\n", tsk -> name);
+	fflush(stdout);
 	tsk -> pid = fork();
 	int PID = tsk -> pid;
 	if(PID < 0) puts("fork GG");

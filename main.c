@@ -59,5 +59,6 @@ int main(){
 		printf("%s %d\n", tsk[i].name, tsk[i].pid);
 		fflush(stdout);
 	}
+	puts("");
 	shm_unlink("exe_T");
 }
