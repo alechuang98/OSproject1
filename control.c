@@ -22,6 +22,8 @@ void make(TSK *tsk){
 	int PID = tsk -> pid;
 	if(PID < 0) puts("fork GG");
 	else if(PID == 0){
+		printf("make %s\n", tsk -> name);
+		fflush(stdout);
 		char tim[105];
 		sprintf(tim, "%d", tsk -> rem);
 		execlp("./task", "./task", tsk -> name, tim, (char *)0);

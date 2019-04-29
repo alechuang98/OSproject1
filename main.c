@@ -15,11 +15,9 @@
 #include <assert.h>
 #include "control.h"
 #include "my_rr.h"
-/* 
 #include "my_fifo.h"
 #include "my_sjf.h"
 #include "my_psjf.h"
-*/
 
 int main(){
 	TSK tsk[1005];
@@ -46,11 +44,9 @@ int main(){
 		scanf("%s %d %d", tsk[i].name, &tsk[i].arr, &tsk[i].rem);
 	}
 	if(cmd[0] == 'R') my_rr(tsk, n);
-	/*
-	if(cmd[0] == 'F') my_fifo(tsk);
-	if(cmd[0] == 'S') my_sjf(tsk);
-	if(cmd[0] == 'P') my_psjf(tsk);
-	*/
+	if(cmd[0] == 'F') my_fifo(tsk, n);
+	if(cmd[0] == 'S') my_sjf(tsk, n);
+	if(cmd[0] == 'P') my_psjf(tsk, n);
 #ifdef TEST
 	for(int i = 0; i < 2; i ++) make(&tsk[i]);
 	run(&tsk[0], 20);
