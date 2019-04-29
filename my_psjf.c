@@ -94,9 +94,6 @@ void my_psjf(TSK *tsk,int n){
 		if(cnt == n)
 			break;
 	}
-	int time = 0;
-	for(int i = 0; i < process_cnt; i++)
-		printf("%d %d\n",process[i][0],process[i][1]);
 	for(int i = 0; i < process_cnt; i++){
 		if(process[i][0] == -1){
 			for(int t = 0 ; t < process[i][1] ; t++){
