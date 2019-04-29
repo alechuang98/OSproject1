@@ -32,7 +32,8 @@ int main(int argc, char *argv[]){
 #endif
 	while(total > 0){
 		total -= *_T;
-		printf("[%s] %d is running for %d unit of time\n", argv[1], getpid(), *_T);
+		// printf("[%s] %d is running for %d unit of time\n", argv[1], getpid(), *_T);
+		// fflush(stdout);
 		for(int t = 0; t < *_T; t ++){
 			volatile unsigned long i;
 			for (i = 0; i < 1000000UL; i ++);
@@ -42,6 +43,7 @@ int main(int argc, char *argv[]){
 			if(syscall(334, &ed.sec, &ed.nsec) == -1) puts("child end time GG");
 			char s[205];
 			sprintf(s, "[Project1] %d %lu.%09lu, %lu.%09lu", getpid(), st.sec, st.nsec, ed.sec, ed.nsec);
+			// printf("%s\n", s);
 			if(syscall(333, s) == -1) puts("dmesg GG");
 		}
 #endif

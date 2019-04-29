@@ -55,9 +55,9 @@ int main(){
 #endif
 	for(int i = 0; i < n; i ++){
 		clear(&tsk[i]);
-		// assert(tsk[i].rem == 0);
-		printf("task %d remain %d units of time (should be 0)\n", i, tsk[i].rem);
+		assert(tsk[i].rem == 0);
 		printf("%s %d\n", tsk[i].name, tsk[i].pid);
+		fflush(stdout);
 	}
 	shm_unlink("exe_T");
 }

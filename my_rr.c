@@ -42,7 +42,6 @@ void my_rr(TSK *tsk, int n) {
 				volatile unsigned long k;
 				for (k = 0; k < 1000000UL; k++);
 			}
-			printf("rr make %d\n", buf[ptr].id);
 			make(&tsk[buf[ptr].id]);
 			st = ed = ptr;
 			buf[ptr].ll = buf[ptr].rr = -1;
@@ -59,7 +58,6 @@ void my_rr(TSK *tsk, int n) {
 					la -= used;
 					t += used;
 				}
-				printf("rr make %d\n", buf[ptr].id);
 				make(&tsk[buf[ptr].id]);
 				buf[ed].rr = ptr;
 				buf[ptr].ll = ed;
