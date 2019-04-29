@@ -45,7 +45,7 @@ void my_sjf(TSK *tsk, int n){
 
 	int t = 0, start, more = 0;
 	int cmd_cnt = 0, cmd_type[10005][3];
-	int del = 0;
+	int maked[1005] = {0};
 	for(int i = 0 ; i < n ; i++){
 		if(i != 0 && more > 1){
 			qsort(&my_tsk[i], more, sizeof(my_tsk[0]), cmp_sjf_find);
@@ -59,6 +59,7 @@ void my_sjf(TSK *tsk, int n){
 			if(i == 0){
 				cmd_type[cmd_cnt][0] = 1;
 				cmd_type[cmd_cnt++][2] = my_tsk[i].org_idx;
+				maked[my_tsk[i].org_idx] = 1;
 			}
 		}
 		else{
@@ -69,13 +70,8 @@ void my_sjf(TSK *tsk, int n){
 		}
 		start = t + wait_time;
 		t += my_tsk[i].rem + wait_time;
-		pre_make -= del;
-		del = 0;
 		for(int j = i+1 ; j < n ; j++){
-			if(my_tsk[j].arr == t) del++;
-			if(my_tsk[j].arr <= t && my_tsk[j].arr >= start){
-				pre_make++;
-			}
+			if(my_tsk[j].arr <= t && my_tsk[j].arr >= start) pre_make++;
 			else break;
 		}
 		for(int j = i+1 ; j < n ; j++){
@@ -83,16 +79,19 @@ void my_sjf(TSK *tsk, int n){
 			else break;
 		}
 		for(int j = i+1 ; j < i+1+pre_make ; j++){
-			int run_time = my_tsk[j].arr - start;
-			start = my_tsk[j].arr;
-			if(run_time != 0){
-				cmd_type[cmd_cnt][0] = 2;
-				cmd_type[cmd_cnt][1] = run_time;
-				cmd_type[cmd_cnt++][2] = my_tsk[i].org_idx;
-				my_tsk[i].rem -= run_time;
-			}
-			cmd_type[cmd_cnt][0] = 1;
-			cmd_type[cmd_cnt++][2] = my_tsk[j].org_idx;		
+			if(maked[my_tsk[j].org_idx] == 0){
+				int run_time = my_tsk[j].arr - start;
+				start = my_tsk[j].arr;
+				if(run_time != 0){
+					cmd_type[cmd_cnt][0] = 2;
+					cmd_type[cmd_cnt][1] = run_time;
+					cmd_type[cmd_cnt++][2] = my_tsk[i].org_idx;
+					my_tsk[i].rem -= run_time;
+				}
+				cmd_type[cmd_cnt][0] = 1;
+				cmd_type[cmd_cnt++][2] = my_tsk[j].org_idx;
+				maked[my_tsk[j].org_idx] = 1;
+			}	
 		}
 		if(my_tsk[i].rem != 0){
 			cmd_type[cmd_cnt][0] = 2;
