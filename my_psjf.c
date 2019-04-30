@@ -36,7 +36,7 @@ void my_psjf(TSK *tsk,int n){
 	int nxt = n;
 	qsort(ntsk,n,sizeof(TSK),cmp);
 	int now = ntsk[0].arr;
-	int process[3000][2];
+	int process[4000][2];
 	for(int i = 1; i < n; i++){
 		if(ntsk[i].arr != ntsk[0].arr){
 			nxt = i;
