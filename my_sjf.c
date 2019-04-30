@@ -75,7 +75,7 @@ void my_sjf(TSK *tsk, int n){
 			else break;
 		}
 		for(int j = i+1 ; j < n ; j++){
-			if(tsk[j].arr <= t) more++;
+			if(my_tsk[j].arr <= t) more++;
 			else break;
 		}
 		for(int j = i+1 ; j < i+1+pre_make ; j++){
