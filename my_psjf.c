@@ -26,7 +26,7 @@ int cmp(const void *a, const void *b){
 void my_psjf(TSK *tsk,int n){
 	TSK ntsk[1005];
 	int appear[1005] = {0};
-	for(int i = 0; i < n; i++){
+	for(int i = 0; i < n; i ++){
 		ntsk[i].arr = tsk[i].arr;
 		ntsk[i].rem = tsk[i].rem;
 		ntsk[i].pid = i;
@@ -37,7 +37,7 @@ void my_psjf(TSK *tsk,int n){
 	qsort(ntsk,n,sizeof(TSK),cmp);
 	int now = ntsk[0].arr;
 	int process[4000][2];
-	for(int i = 1; i < n; i++){
+	for(int i = 1; i < n; i ++){
 		if(ntsk[i].arr != ntsk[0].arr){
 			nxt = i;
 			break;
@@ -46,11 +46,11 @@ void my_psjf(TSK *tsk,int n){
 	ntsk[n].arr = intmax;
 	if(now != 0){
 		process[process_cnt][0] = -1;
-		process[process_cnt++][1] = now;
+		process[process_cnt ++][1] = now;
 	}
 	while(1){
 		int min_index = -1, min_time = intmax;
-		for(int i = 0; i < n; i++){
+		for(int i = 0; i < n; i ++){
 			if(ntsk[i].rem > 0){
 				if(ntsk[i].arr < ntsk[nxt].arr){
 					if(min_time > ntsk[i].rem){
@@ -68,7 +68,7 @@ void my_psjf(TSK *tsk,int n){
 		if(min_index == -1){
 			process[process_cnt][0] = -1;
 			process[process_cnt++][1] = ntsk[nxt].arr - now;
-			for(int i = nxt + 1; i <= n; i++){
+			for(int i = nxt + 1; i <= n; i ++){
 				if(ntsk[i].arr != ntsk[nxt].arr){
 					nxt = i;
 					break;
@@ -78,7 +78,7 @@ void my_psjf(TSK *tsk,int n){
 		}
 		if(now + min_time >= ntsk[nxt].arr){
 			min_time = ntsk[nxt].arr - now;
-			for(int i = nxt + 1; i <= n; i++){
+			for(int i = nxt + 1; i <= n; i ++){
 				if(ntsk[i].arr != ntsk[nxt].arr){
 					nxt = i;
 					break;
@@ -86,25 +86,25 @@ void my_psjf(TSK *tsk,int n){
 			}
 		}
 		process[process_cnt][0] = ntsk[min_index].pid;
-		process[process_cnt++][1] = min_time;
+		process[process_cnt ++][1] = min_time;
 		ntsk[min_index].rem -= min_time;
 		now += min_time;
 		if(ntsk[min_index].rem == 0)
-			cnt++;
+			cnt ++;
 		if(cnt == n)
 			break;
 	}
-	for(int i = 0; i < process_cnt; i++){
+	for(int i = 0; i < process_cnt; i ++){
 		if(process[i][0] == -1){
-			for(int t = 0 ; t < process[i][1] ; t++){
+			for(int t = 0 ; t < process[i][1]; t ++){
 			volatile unsigned long k;
-				for (k = 0; k < 1000000UL ; k++);
+				for (k = 0; k < 1000000UL; k ++);
 			}
 		}
 		else if(process[i][1] == -1)
 			make(&tsk[process[i][0]]);
 		else
-			run(&tsk[process[i][0]],process[i][1]);
+			run(&tsk[process[i][0]], process[i][1]);
 	}
 	return;
 }

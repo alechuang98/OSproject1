@@ -26,6 +26,7 @@ void make(TSK *tsk){
 	else if(PID == 0){
 		fflush(stdout);
 		char tim[105];
+		printf("trigger child");
 		sprintf(tim, "%d", tsk -> rem);
 		execlp("./task", "./task", tsk -> name, tim, (char *)0);
 	}

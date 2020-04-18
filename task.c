@@ -28,27 +28,34 @@ int main(int argc, char *argv[]){
 
 	Time st, ed;
 #ifndef NO_SYS_CALL
-	if(syscall(334, &st.sec, &st.nsec) == -1) puts("child start time GG");
+	if(syscall(334, &st.sec, &st.nsec) == -1) puts("[Child Error] start time syscall error");
 #endif
 	while(total > 0){
 		total -= *_T;
-		// printf("[%s] %d is running for %d unit of time\n", argv[1], getpid(), *_T);
-		// fflush(stdout);
+#ifdef DEBUG
+		printf("[%s] %d is running for %d unit of time\n", argv[1], getpid(), *_T);
+		fflush(stdout);
+#endif
 		for(int t = 0; t < *_T; t ++){
 			volatile unsigned long i;
 			for (i = 0; i < 1000000UL; i ++);
 		}
 #ifndef NO_SYS_CALL
 		if(total == 0){			
-			if(syscall(334, &ed.sec, &ed.nsec) == -1) puts("child end time GG");
+			if(syscall(334, &ed.sec, &ed.nsec) == -1) puts("[Child Error] end time syscall error");
 			char s[205];
 			sprintf(s, "[Project1] %d %lu.%09lu, %lu.%09lu", getpid(), st.sec, st.nsec, ed.sec, ed.nsec);
-			// printf("%s\n", s);
-			if(syscall(333, s) == -1) puts("dmesg GG");
+			puts(s);
+			char sys_call[205] = {0};
+			strcat(sys_call, "echo ");
+			strcat(sys_call, s);
+			strcat(sys_call, " > /dev/kmsg");
+			system(sys_call);
+			// if(syscall(333, s) == -1) puts("[Child Error] dmesg error");
 		}
 #endif
         param.sched_priority = 1;
-		if(sched_setparam(0, &param) < 0) puts("child: param GG");
+		if(sched_setparam(0, &param) < 0) puts("[Child Error] set param error");
 		sched_yield();
 	}
 }
