@@ -9,5 +9,4 @@ typedef struct _process{
 void make(TSK *tsk);
 void run(TSK *tsk, int run_time);
 void clear(TSK *tsk);
-
 #endif
